@@ -1,0 +1,99 @@
+
+127.0.0.1:6379> GET "nome"
+(nil)
+
+127.0.0.1:6379> GET "usuarios_online"
+(nil)
+
+127.0.0.1:6379> SET "usuarios_online" 43
+OK
+
+127.0.0.1:6379> SET "nome" "Geek University"
+OK
+
+127.0.0.1:6379> SET "data-nascimento" "02/07/1998"
+OK
+
+127.0.0.1:6379> KEYS *
+1) "nome"
+2) "data-nascimento"
+3) "usuarios_online"
+
+
+127.0.0.1:6379> SET "nota:14-04-2019:matematica" 8.5
+OK
+
+127.0.0.1:6379> SET "nota:20-06-2019:historia" 9.5
+OK
+
+127.0.0.1:6379> SET "nota:22-06-2019:fisica" 6.3
+OK
+
+127.0.0.1:6379> KEYS *
+1) "nome"
+2) "nota:14-04-2019:matematica"
+3) "nota:22-06-2019:fisica"
+4) "usuarios_online"
+5) "data-nascimento"
+6) "nota:20-06-2019:historia"
+
+127.0.0.1:6379> KEYS nota*
+1) "nota:14-04-2019:matematica"
+2) "nota:22-06-2019:fisica"
+3) "nota:20-06-2019:historia"
+
+127.0.0.1:6379> KEYS nota:*-06*
+1) "nota:22-06-2019:fisica"
+2) "nota:20-06-2019:historia"
+
+127.0.0.1:6379> KEYS nota:*:*
+1) "nota:14-04-2019:matematica"
+2) "nota:22-06-2019:fisica"
+3) "nota:20-06-2019:historia"
+
+127.0.0.1:6379> KEYS nota:*:??????
+1) "nota:22-06-2019:fisica"
+
+127.0.0.1:6379> SET "nota:10-03-2019:ingles" 6.4
+OK
+
+127.0.0.1:6379> SET "nota:10-03-2019:geografia" 7.5
+OK
+
+127.0.0.1:6379> KEYS nota:*-04*
+1) "nota:14-04-2019:matematica"
+
+127.0.0.1:6379> KEYS nota:*-0[46]*
+1) "nota:14-04-2019:matematica"
+2) "nota:22-06-2019:fisica"
+3) "nota:20-06-2019:historia"
+
+127.0.0.1:6379> SET "promocao:ps4:20-05-2019:valor" 1199.56
+OK
+
+127.0.0.1:6379> SET "promocao:xbox360:20-05-2019:valor" 1399.56
+OK
+
+127.0.0.1:6379> SET "promocao:nintendo:20-05-2019:valor" 2199.56
+OK
+
+127.0.0.1:6379> SET "promocao:ps4:22-05-2019:valor" 1150.56
+OK
+
+127.0.0.1:6379> KEYS promocao*
+1) "promocao:xbox360:20-05-2019:valor"
+2) "promocao:nintendo:20-05-2019:valor"
+3) "promocao:ps4:20-05-2019:valor"
+4) "promocao:ps4:22-05-2019:valor"
+
+127.0.0.1:6379> KEYS promocao:ps4:*
+1) "promocao:ps4:20-05-2019:valor"
+2) "promocao:ps4:22-05-2019:valor"
+
+127.0.0.1:6379> KEYS promocao:*:20-*
+1) "promocao:xbox360:20-05-2019:valor"
+2) "promocao:nintendo:20-05-2019:valor"
+3) "promocao:ps4:20-05-2019:valor"
+
+127.0.0.1:6379> MSET "nota:03-07-2019:portugues" 6 "nota:05-07-2019:ingles" 8.9 "nota:10-07-2019:geografia" 7.3
+OK

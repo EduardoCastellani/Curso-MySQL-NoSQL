@@ -1,0 +1,36 @@
+
+127.0.0.1:6379> RPUSH "fila:confirma-celular" "231231231"
+(integer) 1
+
+127.0.0.1:6379> RPUSH "fila:confirma-celular" "123123123"
+(integer) 2
+
+127.0.0.1:6379> RPUSH "fila:confirma-celular" "321321321"
+(integer) 3
+
+127.0.0.1:6379> RPUSH "fila:confirma-celular" "456456456"              /*Adciona a direita */
+(integer) 4
+
+127.0.0.1:6379> LLEN "fila:confirma-celular"                           /*Contagem da lista */
+(integer) 4
+
+127.0.0.1:6379> LRANGE "fila:confirma-celular" 0 3                     /*Leitura da lista com (passar o Range da busca, para buscar todos 0 -1)*/
+1) "231231231"
+2) "123123123"
+3) "321321321"
+4) "456456456"
+
+127.0.0.1:6379> LINDEX "fila:confirma-celular" 0                       /*Le o dado que sera passado*/
+"231231231"
+
+127.0.0.1:6379> LPOP "fila:confirma-celular"                           /*Le o dado e exclui o mesmo apos leitura*/
+"231231231" 
+127.0.0.1:6379> LPOP "fila:confirma-celular"
+"123123123"
+127.0.0.1:6379> LPOP "fila:confirma-celular"
+"321321321"
+127.0.0.1:6379> LPOP "fila:confirma-celular"
+"456456456"
+
+127.0.0.1:6379> LLEN "fila:confirma-celular"
+(integer) 0

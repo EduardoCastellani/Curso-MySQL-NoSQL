@@ -1,0 +1,52 @@
+
+127.0.0.1:6379> LPUSH "ultimos_lancamentos" "O Hobbit"
+(integer) 1
+
+127.0.0.1:6379> LPUSH "ultimos_lancamentos" "Rocketman"
+(integer) 2
+
+127.0.0.1:6379> LPUSH "ultimos_lancamentos" "X-Men: Fenix Negra"
+(integer) 3
+
+127.0.0.1:6379> LPUSH "ultimos_lancamentos" "Homem-Aranha: Longe de casa"
+(integer) 4
+
+127.0.0.1:6379> LINDEX "ultimos_lancamentos" 0
+"Homem-Aranha: Longe de casa"
+
+127.0.0.1:6379> LINDEX "ultimos_lancamentos" 1
+"X-Men: Fenix Negra"
+
+127.0.0.1:6379> LINDEX "ultimos_lancamentos" 2
+"Rocketman"
+
+127.0.0.1:6379> LINDEX "ultimos_lancamentos" 3
+"O Hobbit"
+
+127.0.0.1:6379> LINDEX "ultimos_lancamentos" 4
+(nil)
+
+127.0.0.1:6379> LLEN "ultimos_lancamentos"
+(integer) 4
+
+127.0.0.1:6379> RPUSH "ultimos_lancamentos" "O Senhor dos Aneis: A Sociedade do Anel"
+(integer) 5
+
+127.0.0.1:6379> LINDEX "ultimos_lancamentos" 4
+"O Senhor dos Aneis: A Sociedade do Anel"
+
+127.0.0.1:6379> LRANGE "ultimos_lancamentos" 0 2
+1) "Homem-Aranha: Longe de casa"
+2) "X-Men: Fenix Negra"
+3) "Rocketman"
+
+127.0.0.1:6379> LTRIM "ultimos_lancamentos" 0 2
+OK
+
+127.0.0.1:6379> LLEN "ultimos_lancamentos"
+(integer) 3
+
+127.0.0.1:6379> LRANGE "ultimos_lancamentos" 0 10
+1) "Homem-Aranha: Longe de casa"
+2) "X-Men: Fenix Negra"
+3) "Rocketman"

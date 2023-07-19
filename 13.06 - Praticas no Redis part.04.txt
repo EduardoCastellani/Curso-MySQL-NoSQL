@@ -1,0 +1,79 @@
+
+/* Ranqueando pontuações via REDIS */ 
+127.0.0.1:6379> HSET "jogador" "tsida" 676
+(integer) 1
+
+127.0.0.1:6379> HSET "jogador" "velk" 544
+(integer) 1
+
+127.0.0.1:6379> HSET "jogador" "duque" 685
+(integer) 1
+
+127.0.0.1:6379> hgetall "jogador"
+1) "tsida"
+2) "676"
+3) "velk"
+4) "544"
+5) "duque"
+6) "685"
+
+127.0.0.1:6379> TYPE "jogador"
+hash
+
+127.0.0.1:6379> HINCRBY "jogador" "tsida" 20 /*Incrementar dados caso o "player" faça uma pontuação diferente, H vem de Hash que é o tipo dos dados (INCRBYFLOAT para ADD valores com virgula)*/
+(integer) 696
+
+127.0.0.1:6379> HGETALL "jogador"
+
+1) "tsida"
+2) "696"
+3) "velk"
+4) "544"
+5) "duque"
+6) "685"
+
+127.0.0.1:6379> del "jogador"
+(integer) 1
+
+127.0.0.1:6379> ZADD "jogador" 689 "felicity"
+(integer) 1
+
+127.0.0.1:6379> ZADD "jogador" 544 "angelina"
+(integer) 1
+
+127.0.0.1:6379> ZADD "jogador" 650 "xuxa"
+(integer) 1
+
+127.0.0.1:6379> ZADD "jogador" 975 "vanessa"
+(integer) 1
+
+127.0.0.1:6379> TYPE "jogador"
+zset
+
+127.0.0.1:6379> ZREVRANGE "jogador" 0 2 (REV de revers-ordem asc-. REDIS só organiza por desc)
+1) "vanessa"
+2) "felicity"
+3) "xuxa"
+
+127.0.0.1:6379> ZREVRANGE "jogador" 0 -1 WITHSCORES
+1) "vanessa"
+2) "975"
+3) "felicity"
+4) "689"
+5) "xuxa"
+6) "650"
+7) "angelina"
+8) "544"
+
+127.0.0.1:6379> ZINCRBY "jogador" -100 "vanessa"
+"875"
+
+127.0.0.1:6379> ZREVRANGE "jogador" 0 -1 WITHSCORES
+1) "vanessa"
+2) "875"
+3) "felicity"
+4) "689"
+5) "xuxa"
+6) "650"
+7) "angelina"
+8) "544"

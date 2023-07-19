@@ -1,0 +1,23 @@
+
+127.0.0.1:6379> LPOP "fila:confirma-celular"
+"123123123"
+
+127.0.0.1:6379> LPOP "fila:confirma-celular"
+"321321321"
+
+127.0.0.1:6379> LPOP "fila:confirma-celular"
+"213213213"
+
+127.0.0.1:6379> LPOP "fila:confirma-celular"
+(nil)
+
+127.0.0.1:6379> LPOP "fila:confirma-celular"
+(nil)
+
+127.0.0.1:6379> BLPOP "fila:confirma-celular" 5  /*Timer para ativação do POP, assim o comando esperar o tempo caso nao haja nenhuma input nova, valor 0 fica esperando até nova input*/ 
+(nil)
+(5.01s)
+
+127.0.0.1:6379> BLPOP "fila:confirma-celular" 0
+1) "fila:confirma-celular"
+2) "123123123"
